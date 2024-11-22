@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- custom css file link  -->
+    <link href="css/donastyle.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container">
+
+    <form id="donation-form">
+        <input type="hidden" name="access_key" value="657239e4-780a-4cee-b327-d8736e69bbe3" style="width: 100%; box-sizing: border-box; margin-bottom: 10px;">        
+        <div class="row">
+
+            <div class="col">
+
+                <h3 class="title">billing address</h3>
+
+                <div class="inputBox">
+                    <span>full name :</span>
+                    <input type="text" name="Name" placeholder="john deo" required>
+                </div>
+                <div class="inputBox">
+                    <span>email :</span>
+                    <input type="email" name="email" placeholder="example@example.com" required>
+                </div>
+                <div class="inputBox">
+                    <span>Phone Number :</span>
+                    <input type="text" name="Phone" placeholder="0123456789" required>
+                </div>
+                <div class="inputBox">
+                    <span>address :</span>
+                    <input type="text" placeholder="room - street - locality" required>
+                </div>
+                <div class="inputBox">
+                    <span>city :</span>
+                    <input type="text" placeholder="mumbai" required>
+                </div>
+                
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>state :</span>
+                        <input type="text" placeholder="india" required>
+                    </div>
+                    <div class="inputBox">
+                        <span>zip code :</span>
+                        <input type="text" placeholder="123 456" required>
+                    </div>
+                </div>
+
+                
+
+            </div>
+
+            <div class="col">
+
+                <h3 class="title">payment</h3>
+
+                <div class="inputBox">
+                    <span>cards accepted :</span>
+                    <img src="images/card_img.png" alt="">
+                </div>
+                <div class="inputBox">
+                    <span>name on card :</span>
+                    <input type="text" placeholder="mr. john deo" required>
+                </div>
+                <div class="inputBox">
+                    <span>credit card number :</span>
+                    <input type="text" placeholder="1111-2222-3333-4444" required>
+                </div>
+                <div class="inputBox">
+                    <span>exp month :</span>
+                    <input type="text" placeholder="january" required>
+                </div>
+
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>exp year :</span>
+                        <input type="text" placeholder="2022" required>
+                    </div>
+                    <div class="inputBox">
+                        <span>CVV :</span>
+                        <input type="text" placeholder="1234" required>
+                    </div>
+                </div>
+                
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>Amount :</span>
+                        <input type="text" name="Amount" required>
+                    </div>
+                    <div class="inputBox wide">
+                        <span>Payment :</span>
+                        <div class="dropdown">
+                            <select name="payment">
+                                <option value="10">Weekly</option>
+                                <option value="20">Monthly</option>
+                                <option value="50">Yearly</option>
+                                
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                    </div>
+                </div>      
+            
+
+            </div>
+    
+        </div>
+
+
+
+        <input type="submit" value="proceed to checkout" onclick="submitForm()" class="submit-btn" id="checkout-btn">
+        
+    </form>
+
+</div>    
+
+<script>
+    function submitForm() {
+            var form = document.getElementById("donation-form");
+
+            // You can add form validation here if needed
+
+            // Fetch the form data
+            var formData = new FormData(form);
+
+            // Make the AJAX request
+            fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the success response
+                console.log("Form submitted successfully:", data);
+                alert("Form submitted successfully!");
+                // Optionally, you can reset the form
+                form.reset();
+            })
+            .catch(error => {
+                // Handle the error
+                console.error("Form submission error:", error);
+                alert("Form submission failed. Please try again.");
+            });
+        }
+    
+        // Redirect to roc/index.html after clicking on the alert
+       
+    
+</script>
+       
+</body>
+</html>
